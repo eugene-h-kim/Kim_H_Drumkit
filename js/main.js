@@ -3,7 +3,7 @@
 (() => {
     console.log('music player script file'); // #1
 
-    const theKeys = document.querySelectorAll('.key');
+    const theKeys = document.querySelectorAll('.key');  // #11
 
     function findAndPlayAudio(event) {   // #3
         // debugger;    // #4
@@ -13,18 +13,19 @@
         let audioEl = document.querySelector(`audio[data-key="${event.keyCode}"]`);
 
         // if there is no matching audio element, then stop the function here
-        if (!audioEl) { return; }
+        if (!audioEl) { return; }  // #8
 
         // find the div that matches and animate it
-        let matchingDiv = document.querySelector(`div[data-key="${event.keyCode}"]`);
-        matchingDiv.classList.add('playing');
+        let matchingDiv = document.querySelector(`div[data-key="${event.keyCode}"]`); // #9
+
+        matchingDiv.classList.add('playing');  // #10
 
         // if there is a match, rewind it first and then ask it to play
         audioEl.currentTime = 0; // #7
         audioEl.play(); // #6
     }
 
-    function removePlayingClass(event) {
+    function removePlayingClass(event) {   // #13
         if (event.propertyName === 'transform') {
             this.classList.remove('playing');
         }
@@ -32,6 +33,6 @@
 
     window.addEventListener('keyup', findAndPlayAudio); // #2
 
-    theKeys.forEach(key => key.addEventListener('transitionend', removePlayingClass));
+    theKeys.forEach(key => key.addEventListener('transitionend', removePlayingClass));  // #12
     
 })();
